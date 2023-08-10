@@ -59,7 +59,7 @@ module.exports.updateUser = (req, res) => {
         if (err instanceof mongoose.Error.ValidationError) {
           res.status(HTTP_STATUS_BAD_REQUEST).send({ message: err.message });
         } else {
-          res.status(HTTP_STATUS_NOT_FOUND).send({ message: `Пользователь с _id: ${req.user._id} не найден` });
+          res.status(HTTP_STATUS_SERVER_ERROR).send({ message: `Пользователь с _id: ${req.user._id} не найден` });
         }
       });
   } else {
@@ -80,7 +80,7 @@ module.exports.updateUserAvatar = (req, res) => {
         if (err instanceof mongoose.Error.ValidationError) {
           res.status(HTTP_STATUS_BAD_REQUEST).send({ message: err.message });
         } else {
-          res.status(HTTP_STATUS_NOT_FOUND).send({ message: `Пользователь с _id: ${req.user._id} не найден` });
+          res.status(HTTP_STATUS_SERVER_ERROR).send({ message: `Пользователь с _id: ${req.user._id} не найден` });
         }
       });
   } else {
