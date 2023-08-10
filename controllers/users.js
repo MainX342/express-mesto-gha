@@ -30,6 +30,10 @@ module.exports.getUsersById = (req, res) => {
 
 module.exports.createUser = (req, res) => {
   const { name, about, avatar } = req.body;
+  if (!name || !about) {
+    res.status(HTTP_STATUS_BAD_REQUEST).send({ message: 'Необходимо заполнить все обязательные поля' });
+    return;
+  }
   User.create({ name, about, avatar })
     .then((user) => res.status(HTTP_STATUS_CREATED).send(user))
     .catch((err) => {
