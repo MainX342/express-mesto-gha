@@ -19,15 +19,25 @@ app.use((req, res, next) => {
   req.user = {
     _id: '64d12c646e10d1d13d8e75e9',
   };
-
   next();
 });
 
-app.use('/users', require('./routes/users'));
-app.use('/cards', require('./routes/cards'));
+app.use('/', require('./routes/index'));
 
 app.use('*', (req, res) => {
   res.status(404).send({ message: 'Запрашиваемая странница не найдена' });
+});
+
+app.use((err, req, res, next) => {
+  const { statusCode = 500, message } = err;
+  res
+    .status(statusCode)
+    .send({
+      message: statusCode === 500
+        ? 'На сервере произошла ошибка'
+        : message,
+    });
+  next();
 });
 
 app.listen(PORT);
