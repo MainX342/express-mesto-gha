@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const { SECRET_KEY = 'yandex-practicum' } = process.env;
+const { SECRET_KEY = 'yandex-practicum-mainx' } = process.env;
 const UnautorizedError = require('../errors/UnautorizedError');
 
 module.exports = (req, res, next) => {

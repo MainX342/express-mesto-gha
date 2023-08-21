@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-const { SECRET_KEY = 'yandex-practicum' } = process.env;
+const { SECRET_KEY = 'yandex-practicum-mainx' } = process.env;
 
 const BadRequestError = require('../errors/BadRequestError');
 const NotFoundError = require('../errors/NotFoundError');

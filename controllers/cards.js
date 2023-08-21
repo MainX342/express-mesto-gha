@@ -42,6 +42,7 @@ module.exports.createCard = (req, res, next) => {
 
 module.exports.deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
+    .orFail()
     .then((card) => {
       if (!card.owner.equals(req.user._id)) {
         throw new ForbiddenError('Невозможно удалить карточку другого пользователя');
@@ -62,8 +63,8 @@ module.exports.deleteCard = (req, res, next) => {
         });
     })
     .catch((err) => {
-      if (err.name === 'TypeError') {
-        next(new NotFoundError(`Карточка с _id: ${req.params.cardId} не найдена.`));
+      if (err instanceof mongoose.Error.DocumentNotFoundError) {
+        next(new NotFoundError(`Карточка с _id: ${req.params.cardId} не найдена`));
       } else {
         next(err);
       }

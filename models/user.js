@@ -48,7 +48,7 @@ async function findUserByCredentials(email, password) {
   const user = await this.findOne({ email }).select('+password');
 
   if (!user) {
-    throw new UnautorizedError('Неправильные почта или пароль');
+    throw new UnautorizedError(`Пользователь с email: ${email} не найден`);
   }
 
   const matched = await bcrypt.compare(password, user.password);
